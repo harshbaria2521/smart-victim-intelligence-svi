@@ -34,9 +34,11 @@ export default function LoginPage() {
       <div className="bg-white rounded-xl border border-gov-border shadow-md overflow-hidden">
         {/* Header */}
         <div className="bg-gov-navy text-white p-6 text-center space-y-2">
-          <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto text-amber-300">
-            <Shield className="w-7 h-7" />
-          </div>
+          <img
+            src="/svi_app_icon.jpg"
+            alt="SVI Logo"
+            className="w-14 h-14 rounded-2xl mx-auto shadow-md ring-2 ring-amber-300/40 object-cover"
+          />
           <h1 className="text-lg font-bold">
             {lang === 'hi' ? 'SVI पहचान एवं लॉगिन पोर्टल' : 'SVI Access & Login Portal'}
           </h1>

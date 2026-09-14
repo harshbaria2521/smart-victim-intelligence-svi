@@ -6,6 +6,11 @@ import { Shield, Phone, ExternalLink } from 'lucide-react';
 export const metadata = {
   title: 'SVI — Smart Victim Intelligence | NHAA 14566',
   description: 'AI-Based Real-Time Stress & Trauma Assessment Module for National Helpline Against Atrocities (14566), Ministry of Social Justice & Empowerment, Government of India.',
+  icons: {
+    icon: '/svi_app_icon.jpg',
+    shortcut: '/svi_app_icon.jpg',
+    apple: '/svi_app_icon.jpg',
+  },
 };
 
 export default function RootLayout({ children }) {
