@@ -125,21 +125,21 @@ export default function CounsellorDashboardPage() {
         <div
           role="alert"
           aria-live="assertive"
-          className="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-xl shadow-sm flex items-center justify-between gap-3 animate-fadeIn"
+          className="bg-red-50 dark:bg-red-950/50 border-l-4 border-red-600 p-4 rounded-r-xl shadow-sm flex items-center justify-between gap-3 animate-fadeIn transition-colors"
         >
           <div className="flex items-center gap-3">
             <div className="relative">
               <span className="w-3 h-3 bg-red-600 rounded-full inline-block animate-ping absolute -top-0.5 -right-0.5" />
-              <BellRing className="w-5 h-5 text-red-700 flex-shrink-0 relative" aria-hidden="true" />
+              <BellRing className="w-5 h-5 text-red-700 dark:text-red-400 flex-shrink-0 relative" aria-hidden="true" />
             </div>
             <div>
-              <span className="font-bold text-xs text-red-900 uppercase tracking-wide flex items-center gap-2">
+              <span className="font-bold text-xs text-red-900 dark:text-red-200 uppercase tracking-wide flex items-center gap-2">
                 <span>🔴 Urgent Triage Notice</span>
-                <span className="bg-red-200 text-red-900 text-[10px] px-2 py-0.5 rounded-full font-extrabold">
+                <span className="bg-red-200 dark:bg-red-900 text-red-900 dark:text-red-100 text-[10px] px-2 py-0.5 rounded-full font-extrabold">
                   {criticalCount} Critical • {highCount} High Priority
                 </span>
               </span>
-              <p className="text-xs text-red-800 font-medium mt-0.5">
+              <p className="text-xs text-red-800 dark:text-red-300 font-medium mt-0.5">
                 Immediate officer review required for severe trauma / atrocity flagged cases.
               </p>
             </div>
@@ -149,7 +149,7 @@ export default function CounsellorDashboardPage() {
             type="button"
             aria-label="Dismiss critical alert notification"
             onClick={() => setShowAlertBanner(false)}
-            className="text-red-700 hover:text-red-900 p-1.5 rounded-lg hover:bg-red-100 transition-colors focus:ring-2 focus:ring-red-600"
+            className="text-red-700 dark:text-red-300 hover:text-red-900 dark:hover:text-red-100 p-1.5 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/50 transition-colors focus:ring-2 focus:ring-red-600"
           >
             <X className="w-4 h-4" aria-hidden="true" />
           </button>
@@ -157,20 +157,20 @@ export default function CounsellorDashboardPage() {
       )}
 
       {/* Top Header */}
-      <div className="bg-white p-5 sm:p-6 rounded-xl border border-gov-border shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="bg-white dark:bg-slate-900 p-5 sm:p-6 rounded-xl border border-gov-border dark:border-slate-800 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4 transition-colors">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold uppercase tracking-wider bg-gov-tealSoft text-gov-teal px-2 py-0.5 rounded border border-gov-teal/20">
+            <span className="text-xs font-bold uppercase tracking-wider bg-gov-tealSoft dark:bg-teal-950/60 text-gov-teal dark:text-teal-300 px-2 py-0.5 rounded border border-gov-teal/20 dark:border-teal-800/40">
               NHAA 14566 Triage
             </span>
-            <span className="text-xs text-gov-textMuted">
+            <span className="text-xs text-gov-textMuted dark:text-slate-400">
               Ministry of Social Justice &amp; Empowerment
             </span>
           </div>
-          <h1 className="text-xl sm:text-2xl font-bold text-gov-navy mt-1">
+          <h1 className="text-xl sm:text-2xl font-bold text-gov-navy dark:text-slate-100 mt-1">
             {t.queueTitle}
           </h1>
-          <p className="text-xs text-gov-textMuted mt-0.5">
+          <p className="text-xs text-gov-textMuted dark:text-slate-400 mt-0.5">
             Real-time stress &amp; trauma risk prioritized queue for authorized officers and counsellors.
           </p>
         </div>
@@ -190,8 +190,8 @@ export default function CounsellorDashboardPage() {
             }}
             className={`flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-lg border transition-colors focus:ring-2 focus:ring-gov-teal ${
               alertEnabled
-                ? 'bg-gov-tealSoft text-gov-teal border-gov-teal/30 hover:bg-gov-teal hover:text-white'
-                : 'bg-slate-100 text-slate-500 border-slate-300 hover:bg-slate-200'
+                ? 'bg-gov-tealSoft dark:bg-teal-950/60 text-gov-teal dark:text-teal-300 border-gov-teal/30 dark:border-teal-700 hover:bg-gov-teal hover:text-white'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700'
             }`}
           >
             {alertEnabled
@@ -201,11 +201,11 @@ export default function CounsellorDashboardPage() {
             <span>{alertEnabled ? '🔔 Alert On' : '🔕 Alert Off'}</span>
           </button>
 
-          <div className="flex items-center gap-3 bg-gov-cream p-3 rounded-lg border border-gov-border text-xs">
-            <UserCheck className="w-5 h-5 text-gov-teal flex-shrink-0" aria-hidden="true" />
+          <div className="flex items-center gap-3 bg-gov-cream dark:bg-slate-800 p-3 rounded-lg border border-gov-border dark:border-slate-700 text-xs">
+            <UserCheck className="w-5 h-5 text-gov-teal dark:text-teal-400 flex-shrink-0" aria-hidden="true" />
             <div>
-              <div className="font-bold text-gov-navy">{user?.name || 'Officer Sharma'}</div>
-              <div className="text-[11px] text-gov-textMuted">Badge: NHAA-OFFICER-412</div>
+              <div className="font-bold text-gov-navy dark:text-slate-100">{user?.name || 'Officer Sharma'}</div>
+              <div className="text-[11px] text-gov-textMuted dark:text-slate-400">Badge: NHAA-OFFICER-412</div>
             </div>
           </div>
         </div>
@@ -213,27 +213,27 @@ export default function CounsellorDashboardPage() {
 
       {/* Stats Summary Bar */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="bg-white p-3.5 rounded-lg border border-gov-border shadow-sm">
-          <div className="text-xs text-slate-600 font-medium">Total Cases in Queue</div>
-          <div className="text-xl font-bold text-gov-navy mt-1">{cases.length}</div>
+        <div className="bg-white dark:bg-slate-900 p-3.5 rounded-lg border border-gov-border dark:border-slate-800 shadow-sm transition-colors">
+          <div className="text-xs text-slate-600 dark:text-slate-400 font-medium">Total Cases in Queue</div>
+          <div className="text-xl font-bold text-gov-navy dark:text-slate-100 mt-1">{cases.length}</div>
         </div>
-        <div className="bg-white p-3.5 rounded-lg border border-gov-border shadow-sm">
-          <div className="text-xs text-red-700 font-bold flex items-center gap-1">
-            <AlertOctagon className="w-3.5 h-3.5 text-red-600" aria-hidden="true" /> Critical Risk Cases
+        <div className="bg-white dark:bg-slate-900 p-3.5 rounded-lg border border-gov-border dark:border-slate-800 shadow-sm transition-colors">
+          <div className="text-xs text-red-700 dark:text-red-400 font-bold flex items-center gap-1">
+            <AlertOctagon className="w-3.5 h-3.5 text-red-600 dark:text-red-400" aria-hidden="true" /> Critical Risk Cases
           </div>
-          <div className="text-xl font-bold text-red-700 mt-1">{criticalCount}</div>
+          <div className="text-xl font-bold text-red-700 dark:text-red-400 mt-1">{criticalCount}</div>
         </div>
-        <div className="bg-white p-3.5 rounded-lg border border-gov-border shadow-sm">
-          <div className="text-xs text-amber-800 font-bold flex items-center gap-1">
-            <Clock className="w-3.5 h-3.5 text-amber-700" aria-hidden="true" /> Active in Review
+        <div className="bg-white dark:bg-slate-900 p-3.5 rounded-lg border border-gov-border dark:border-slate-800 shadow-sm transition-colors">
+          <div className="text-xs text-amber-800 dark:text-amber-300 font-bold flex items-center gap-1">
+            <Clock className="w-3.5 h-3.5 text-amber-700 dark:text-amber-400" aria-hidden="true" /> Active in Review
           </div>
-          <div className="text-xl font-bold text-amber-800 mt-1">{inReviewCount}</div>
+          <div className="text-xl font-bold text-amber-800 dark:text-amber-300 mt-1">{inReviewCount}</div>
         </div>
-        <div className="bg-white p-3.5 rounded-lg border border-gov-border shadow-sm">
-          <div className="text-xs text-blue-800 font-bold flex items-center gap-1">
-            <CheckCircle2 className="w-3.5 h-3.5 text-blue-700" aria-hidden="true" /> Unassigned / New
+        <div className="bg-white dark:bg-slate-900 p-3.5 rounded-lg border border-gov-border dark:border-slate-800 shadow-sm transition-colors">
+          <div className="text-xs text-blue-800 dark:text-blue-300 font-bold flex items-center gap-1">
+            <CheckCircle2 className="w-3.5 h-3.5 text-blue-700 dark:text-blue-400" aria-hidden="true" /> Unassigned / New
           </div>
-          <div className="text-xl font-bold text-blue-800 mt-1">{newCount}</div>
+          <div className="text-xl font-bold text-blue-800 dark:text-blue-300 mt-1">{newCount}</div>
         </div>
       </div>
 

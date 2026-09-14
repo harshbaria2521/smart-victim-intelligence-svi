@@ -1,5 +1,6 @@
 import './globals.css';
 import { AuthProvider } from '../lib/authContext';
+import { ThemeProvider } from '../lib/themeContext';
 import Navbar from '../components/Navbar';
 import { Shield, Phone, ExternalLink } from 'lucide-react';
 
@@ -15,16 +16,38 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className="bg-gov-cream min-h-screen flex flex-col antialiased text-gov-textMain selection:bg-gov-tealSoft selection:text-gov-teal">
-        <AuthProvider>
-          <Navbar />
-          <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
-            {children}
-          </main>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('svi_theme');
+                  var isDark = saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches) || (saved === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                  if (isDark) {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.style.colorScheme = 'dark';
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.style.colorScheme = 'light';
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="bg-gov-cream dark:bg-slate-950 min-h-screen flex flex-col antialiased text-gov-textMain dark:text-slate-100 selection:bg-gov-tealSoft selection:text-gov-teal transition-colors duration-200">
+        <ThemeProvider>
+          <AuthProvider>
+            <Navbar />
+            <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+              {children}
+            </main>
 
-          {/* Official Government Footer */}
-          <footer className="bg-gov-navyDark text-slate-300 border-t border-slate-800 text-xs mt-auto">
+            {/* Official Government Footer */}
+            <footer className="bg-gov-navyDark dark:bg-slate-950 text-slate-300 border-t border-slate-800 dark:border-slate-800/80 text-xs mt-auto transition-colors">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Col 1: Initiative info */}
               <div className="space-y-2">
@@ -72,6 +95,7 @@ export default function RootLayout({ children }) {
             </div>
           </footer>
         </AuthProvider>
+      </ThemeProvider>
       </body>
     </html>
   );

@@ -307,9 +307,9 @@ export default function ChatWidget() {
   };
 
   return (
-    <div className="flex flex-col h-[78vh] sm:h-[82vh] bg-white rounded-2xl shadow-xl border border-gov-border overflow-hidden">
+    <div className="flex flex-col h-[78vh] sm:h-[82vh] bg-white dark:bg-[#111b21] rounded-2xl shadow-xl border border-gov-border dark:border-slate-800 overflow-hidden transition-colors">
       {/* WhatsApp Style Top Chat Bar */}
-      <div className="bg-[#075E54] text-white p-3.5 sm:px-6 flex items-center justify-between shadow-sm">
+      <div className="bg-[#075E54] dark:bg-[#064e46] text-white p-3.5 sm:px-6 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-3">
           <div className="relative">
             <div className="w-10 h-10 rounded-full bg-[#128C7E] flex items-center justify-center font-bold text-white shadow-inner">
@@ -365,9 +365,9 @@ export default function ChatWidget() {
       </div>
 
       {/* Emergency Notice Ribbon */}
-      <div className="bg-[#FFF8E7] border-b border-amber-200/80 px-4 py-2 flex items-center justify-between text-xs text-amber-950 font-medium">
+      <div className="bg-[#FFF8E7] dark:bg-amber-950/40 border-b border-amber-200/80 dark:border-amber-800/60 px-4 py-2 flex items-center justify-between text-xs text-amber-950 dark:text-amber-200 font-medium transition-colors">
         <div className="flex items-center gap-2">
-          <AlertTriangle className="w-4 h-4 text-amber-700 flex-shrink-0" aria-hidden="true" />
+          <AlertTriangle className="w-4 h-4 text-amber-700 dark:text-amber-400 flex-shrink-0" aria-hidden="true" />
           <span>{t.crisisBanner}</span>
         </div>
         <div className="flex gap-2">
@@ -388,12 +388,11 @@ export default function ChatWidget() {
         </div>
       </div>
 
-      {/* WhatsApp Beige Chat Body */}
+      {/* WhatsApp Chat Body */}
       <div
-        className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-3"
+        className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-3 bg-[#EFEAE2] dark:bg-[#0b141a] text-slate-400 dark:text-slate-600 transition-colors"
         style={{
-          backgroundColor: '#EFEAE2',
-          backgroundImage: 'radial-gradient(#d4cdbf 0.75px, transparent 0.75px)',
+          backgroundImage: 'radial-gradient(currentColor 0.75px, transparent 0.75px)',
           backgroundSize: '16px 16px',
         }}
       >
@@ -405,8 +404,8 @@ export default function ChatWidget() {
             <div
               className={`max-w-[85%] sm:max-w-[75%] p-3 text-xs sm:text-sm leading-relaxed shadow-xs ${
                 msg.sender === 'user'
-                  ? 'bg-[#D9FDD3] text-[#111B21] rounded-2xl rounded-tr-xs'
-                  : 'bg-white text-[#111B21] rounded-2xl rounded-tl-xs border border-black/5'
+                  ? 'bg-[#D9FDD3] dark:bg-[#005c4b] text-[#111B21] dark:text-emerald-50 rounded-2xl rounded-tr-xs'
+                  : 'bg-white dark:bg-[#202c33] text-[#111B21] dark:text-slate-100 rounded-2xl rounded-tl-xs border border-black/5 dark:border-white/10'
               }`}
             >
               <FormattedMessage text={msg.text} />
@@ -475,7 +474,7 @@ export default function ChatWidget() {
         {/* Typing indicator */}
         {isTyping && (
           <div className="flex justify-start">
-            <div className="bg-white rounded-2xl rounded-tl-xs p-3 shadow-xs border border-black/5 flex items-center gap-2 text-xs text-slate-600">
+            <div className="bg-white dark:bg-[#202c33] rounded-2xl rounded-tl-xs p-3 shadow-xs border border-black/5 dark:border-white/10 flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300">
               <span className="w-2 h-2 bg-[#008069] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
               <span className="w-2 h-2 bg-[#008069] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
               <span className="w-2 h-2 bg-[#008069] rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
@@ -488,7 +487,7 @@ export default function ChatWidget() {
       </div>
 
       {/* WhatsApp Style Bottom Input Bar */}
-      <div className="p-3 bg-[#F0F2F5] border-t border-slate-200">
+      <div className="p-3 bg-[#F0F2F5] dark:bg-[#202c33] border-t border-slate-200 dark:border-slate-800 transition-colors">
         <form onSubmit={handleSend} className="flex items-center gap-2 max-w-4xl mx-auto">
           {/* Voice Input Mic Button */}
           <button
@@ -499,10 +498,10 @@ export default function ChatWidget() {
             className={`w-10 h-10 rounded-full flex items-center justify-center transition-all shadow-xs focus:ring-2 focus:ring-[#008069] ${
               isRecording
                 ? 'bg-red-500 text-white animate-pulse'
-                : 'bg-white text-[#54656F] hover:bg-slate-100 border border-slate-300'
+                : 'bg-white dark:bg-[#2a3942] text-[#54656F] dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#32444f] border border-slate-300 dark:border-slate-700'
             }`}
           >
-            {isRecording ? <MicOff className="w-5 h-5" aria-hidden="true" /> : <Mic className="w-5 h-5 text-[#008069]" aria-hidden="true" />}
+            {isRecording ? <MicOff className="w-5 h-5" aria-hidden="true" /> : <Mic className="w-5 h-5 text-[#008069] dark:text-emerald-400" aria-hidden="true" />}
           </button>
 
           {/* Pill Input Box */}
@@ -512,7 +511,7 @@ export default function ChatWidget() {
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
             placeholder={isRecording ? t.voiceInputListening : t.chatPlaceholder}
-            className="flex-1 bg-white border border-slate-300 rounded-full px-5 py-2.5 text-xs sm:text-sm text-[#111B21] focus:outline-none focus:ring-2 focus:ring-[#008069] shadow-xs transition-all"
+            className="flex-1 bg-white dark:bg-[#2a3942] border border-slate-300 dark:border-slate-700 rounded-full px-5 py-2.5 text-xs sm:text-sm text-[#111B21] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#008069] shadow-xs transition-all"
           />
 
           {/* Send Button */}
@@ -526,9 +525,9 @@ export default function ChatWidget() {
           </button>
         </form>
 
-        <div className="mt-2 flex items-center justify-between text-[11px] text-slate-600 px-2 max-w-4xl mx-auto">
+        <div className="mt-2 flex items-center justify-between text-[11px] text-slate-600 dark:text-slate-400 px-2 max-w-4xl mx-auto">
           <span className="flex items-center gap-1">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#008069]" aria-hidden="true" />
+            <ShieldCheck className="w-3.5 h-3.5 text-[#008069] dark:text-emerald-400" aria-hidden="true" />
             AI Real-Time Trauma Triage • 256-bit Encrypted & Confidential
           </span>
           <span className="hidden md:inline font-medium">

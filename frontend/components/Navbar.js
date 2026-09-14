@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useAuth } from '../lib/authContext';
 import { translations } from '../lib/translations';
 import LanguageSwitcher from './LanguageSwitcher';
+import ThemeToggle from './ThemeToggle';
 import { Shield, PhoneCall, UserCheck, BarChart3, MessageSquare, Lock, LogOut } from 'lucide-react';
 
 export default function Navbar() {
@@ -14,12 +15,12 @@ export default function Navbar() {
   const t = translations[lang] || translations.en;
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-gov-border">
+    <header className="sticky top-0 z-50 bg-white dark:bg-slate-900 shadow-sm border-b border-gov-border dark:border-slate-800 transition-colors">
       {/* Tricolor Government Top Strip */}
       <div className="h-1.5 w-full bg-gradient-to-r from-[#FF9933] via-white to-[#138808]" />
 
       {/* Top Official Banner */}
-      <div className="bg-gov-navyDark text-slate-100 text-xs py-1.5 px-4 sm:px-6">
+      <div className="bg-gov-navyDark dark:bg-slate-950 text-slate-100 text-xs py-1.5 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1">
           <div className="flex items-center gap-2">
             <span className="font-semibold text-amber-300 tracking-wide">{t.govIndia}</span>
@@ -50,29 +51,29 @@ export default function Navbar() {
           <img
             src="/svi_app_icon.jpg"
             alt="SVI Logo"
-            className="w-10 h-10 rounded-xl object-cover shadow-sm ring-1 ring-gov-border group-hover:scale-105 transition-transform"
+            className="w-10 h-10 rounded-xl object-cover shadow-sm ring-1 ring-gov-border dark:ring-slate-700 group-hover:scale-105 transition-transform"
           />
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-bold text-gov-navy text-lg tracking-tight">SVI</span>
-              <span className="text-xs bg-gov-tealSoft text-gov-teal font-semibold px-2 py-0.5 rounded border border-gov-teal/20">
+              <span className="font-bold text-gov-navy dark:text-slate-100 text-lg tracking-tight">SVI</span>
+              <span className="text-xs bg-gov-tealSoft dark:bg-teal-950/60 text-gov-teal dark:text-teal-300 font-semibold px-2 py-0.5 rounded border border-gov-teal/20 dark:border-teal-800/40">
                 NHAA 14566
               </span>
             </div>
-            <p className="text-xs text-gov-textMuted font-medium hidden sm:block">
+            <p className="text-xs text-gov-textMuted dark:text-slate-400 font-medium hidden sm:block">
               {t.portalSubtitle}
             </p>
           </div>
         </Link>
 
         {/* Navigation Links */}
-        <nav className="flex items-center gap-2 sm:gap-4">
+        <nav className="flex items-center gap-1.5 sm:gap-3">
           <Link
             href="/"
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
               pathname === '/'
                 ? 'bg-gov-teal text-white'
-                : 'text-gov-textMain hover:bg-gov-sand/60'
+                : 'text-gov-textMain dark:text-slate-200 hover:bg-gov-sand/60 dark:hover:bg-slate-800'
             }`}
           >
             <MessageSquare className="w-4 h-4" />
@@ -84,7 +85,7 @@ export default function Navbar() {
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
               pathname === '/consent'
                 ? 'bg-gov-teal text-white'
-                : 'text-gov-textMain hover:bg-gov-sand/60'
+                : 'text-gov-textMain dark:text-slate-200 hover:bg-gov-sand/60 dark:hover:bg-slate-800'
             }`}
           >
             <Lock className="w-4 h-4" />
@@ -96,8 +97,8 @@ export default function Navbar() {
             href="/counsellor"
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
               pathname.startsWith('/counsellor')
-                ? 'bg-gov-navy text-white'
-                : 'text-gov-textMain hover:bg-gov-sand/60'
+                ? 'bg-gov-navy dark:bg-teal-800 text-white'
+                : 'text-gov-textMain dark:text-slate-200 hover:bg-gov-sand/60 dark:hover:bg-slate-800'
             }`}
           >
             <UserCheck className="w-4 h-4 text-amber-500" />
@@ -109,29 +110,32 @@ export default function Navbar() {
             href="/admin"
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
               pathname === '/admin'
-                ? 'bg-gov-navy text-white'
-                : 'text-gov-textMain hover:bg-gov-sand/60'
+                ? 'bg-gov-navy dark:bg-teal-800 text-white'
+                : 'text-gov-textMain dark:text-slate-200 hover:bg-gov-sand/60 dark:hover:bg-slate-800'
             }`}
           >
-            <BarChart3 className="w-4 h-4 text-emerald-600" />
+            <BarChart3 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span className="hidden lg:inline">{t.navAdmin}</span>
           </Link>
 
-          <div className="h-5 w-px bg-gov-border mx-1" />
+          <div className="h-5 w-px bg-gov-border dark:bg-slate-700 mx-0.5" />
 
           {/* Language Switcher */}
           <LanguageSwitcher />
 
+          {/* Adaptive Theme Toggle (Beside Language Selection) */}
+          <ThemeToggle />
+
           {/* User / Staff / Victim Status */}
           {user ? (
             <div className="flex items-center gap-2 pl-1">
-              <span className="hidden xl:inline text-xs font-semibold text-gov-navy bg-amber-50 border border-amber-200 px-2 py-1 rounded">
+              <span className="hidden xl:inline text-xs font-semibold text-gov-navy dark:text-amber-200 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 px-2 py-1 rounded">
                 {user.name} ({user.role})
               </span>
               <button
                 onClick={logoutStaff}
                 title={t.navLogout}
-                className="p-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
+                className="p-1.5 text-slate-500 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-md transition-colors"
                 aria-label="Logout Staff"
               >
                 <LogOut className="w-4 h-4" />
@@ -141,7 +145,7 @@ export default function Navbar() {
             <div className="flex items-center gap-2 pl-1">
               <Link
                 href="/profile"
-                className="flex items-center gap-1.5 text-xs font-bold text-gov-navy bg-gov-tealSoft border border-gov-teal/30 px-2.5 py-1 rounded hover:bg-gov-teal hover:text-white transition-colors"
+                className="flex items-center gap-1.5 text-xs font-bold text-gov-navy dark:text-teal-200 bg-gov-tealSoft dark:bg-teal-950/60 border border-gov-teal/30 dark:border-teal-700 px-2.5 py-1 rounded hover:bg-gov-teal hover:text-white transition-colors"
               >
                 <span>{victim.name}</span>
                 <span className="text-[10px] font-mono opacity-80 font-normal">({victim.id})</span>
@@ -149,7 +153,7 @@ export default function Navbar() {
               <button
                 onClick={logoutVictim}
                 title="Logout Profile"
-                className="p-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
+                className="p-1.5 text-slate-500 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-md transition-colors"
                 aria-label="Logout Victim"
               >
                 <LogOut className="w-4 h-4" />
@@ -158,7 +162,7 @@ export default function Navbar() {
           ) : (
             <Link
               href="/login"
-              className="text-xs font-semibold text-gov-teal border border-gov-teal/40 hover:bg-gov-tealSoft px-2.5 py-1.5 rounded-md transition-colors"
+              className="text-xs font-semibold text-gov-teal dark:text-teal-300 border border-gov-teal/40 dark:border-teal-700 hover:bg-gov-tealSoft dark:hover:bg-teal-950/40 px-2.5 py-1.5 rounded-md transition-colors"
             >
               {t.navLogin}
             </Link>
