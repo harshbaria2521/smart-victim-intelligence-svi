@@ -463,7 +463,7 @@ export default function ChatWidget() {
                   msg.sender === 'user' ? 'text-slate-600' : 'text-slate-500'
                 }`}
               >
-                <span>{msg.timestamp}</span>
+                <span suppressHydrationWarning>{msg.timestamp}</span>
                 {msg.sender === 'user' && (
                   <span className="text-[#53bdeb] text-[11px] font-bold" aria-label="Delivered">✓✓</span>
                 )}
